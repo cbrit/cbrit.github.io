@@ -22,7 +22,9 @@
           }),
         ),
       );
-      const js = atob(parts.join("").replace(/\s+/g, ""));
+      const binary = atob(parts.join("").replace(/\s+/g, ""));
+      const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+      const js = new TextDecoder("utf-8").decode(bytes);
       const script = document.createElement("script");
       script.type = "module";
       script.textContent = js;
